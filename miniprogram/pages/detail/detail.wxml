@@ -1,0 +1,47 @@
+<view class="container" wx:if="{{route}}">
+  <view class="card">
+    <image wx:if="{{route.cover}}" src="{{route.cover}}" mode="aspectFill" style="width:100%;height:300rpx;border-radius:12rpx;margin-bottom:12rpx;"></image>
+    <view class="title">{{route.title}}</view>
+    <view class="sub" style="margin-top:8rpx;">{{route.duration}} · {{route.budget}} · {{route.style}}</view>
+    <view class="sub">{{route.ageRange}} · {{route.incomeRange}} · {{route.author}}</view>
+    <view class="sub">{{route.createdAt}}</view>
+    <view class="sub" style="margin-top:8rpx;">👀{{route.views}}  ⭐{{route.favorites}}  💬{{route.comments}}</view>
+
+    <view class="tags">
+      <view class="tag" wx:for="{{route.spots}}" wx:key="index">{{item.type}}</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="title" style="font-size:30rpx;">点位清单</view>
+    <view wx:for="{{route.spots}}" wx:key="index" style="padding:12rpx 0;border-bottom:1rpx solid #f1f1f1;">
+      <view style="font-weight:600">{{item.name}}</view>
+      <view class="sub">{{item.type}}｜{{item.note}}</view>
+    </view>
+    <view style="margin-top:14rpx;">
+      <view style="font-weight:600">交通</view>
+      <view class="sub">{{route.transport || '暂无'}}</view>
+    </view>
+    <view style="margin-top:14rpx;">
+      <view style="font-weight:600">Tips</view>
+      <view class="sub">{{route.tips || '暂无'}}</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <button class="btn-main" bindtap="onFavorite">{{favText}}</button>
+  </view>
+
+  <view class="card">
+    <view class="title" style="font-size:30rpx;">评论</view>
+    <textarea class="textarea" placeholder="写评论..." value="{{commentText}}" bindinput="onCommentInput"></textarea>
+    <button class="btn-main" bindtap="submitComment">发表评论</button>
+
+    <view wx:if="{{!comments.length}}" class="sub" style="margin-top:14rpx;">暂无评论</view>
+    <view wx:for="{{comments}}" wx:key="id" style="padding:14rpx 0;border-top:1rpx solid #f3f3f3;">
+      <view style="font-weight:600">{{item.user}}</view>
+      <view style="margin-top:6rpx;">{{item.content}}</view>
+      <view class="sub" style="margin-top:6rpx;">{{item.createdAt}}</view>
+    </view>
+  </view>
+</view>
