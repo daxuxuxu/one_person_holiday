@@ -1,0 +1,38 @@
+<view class="container">
+  <input class="input" placeholder="路线标题" value="{{form.title}}" data-k="title" bindinput="onInput" />
+  <input class="input" placeholder="封面图URL（可选）" value="{{form.cover}}" data-k="cover" bindinput="onInput" />
+  <textarea class="textarea" placeholder="路线简介" value="{{form.summary}}" data-k="summary" bindinput="onInput" />
+
+  <picker mode="selector" range="{{ageOptions}}" value="{{ageIndex}}" bindchange="onAgeChange">
+    <view class="picker-box">适合年龄：{{ageOptions[ageIndex]}}</view>
+  </picker>
+  <picker mode="selector" range="{{incomeOptions}}" value="{{incomeIndex}}" bindchange="onIncomeChange">
+    <view class="picker-box">适合收入：{{incomeOptions[incomeIndex]}}</view>
+  </picker>
+  <picker mode="selector" range="{{durationOptions}}" value="{{durationIndex}}" bindchange="onDurationChange">
+    <view class="picker-box">时长：{{durationOptions[durationIndex]}}</view>
+  </picker>
+  <picker mode="selector" range="{{styleOptions}}" value="{{styleIndex}}" bindchange="onStyleChange">
+    <view class="picker-box">风格：{{styleOptions[styleIndex]}}</view>
+  </picker>
+
+  <input class="input" placeholder="预算（如：150-300）" value="{{form.budget}}" data-k="budget" bindinput="onInput" />
+  <textarea class="textarea" placeholder="交通方案" value="{{form.transport}}" data-k="transport" bindinput="onInput" />
+  <textarea class="textarea" placeholder="其他提示" value="{{form.tips}}" data-k="tips" bindinput="onInput" />
+  <input class="input" placeholder="作者昵称（可选）" value="{{form.author}}" data-k="author" bindinput="onInput" />
+
+  <view class="card">
+    <view class="title" style="font-size:30rpx;">点位（打卡/拍照/美食）</view>
+    <view wx:for="{{spots}}" wx:key="index" style="margin-top:14rpx; border-top:1rpx solid #f0f0f0; padding-top:14rpx;">
+      <picker mode="selector" range="{{spotTypeOptions}}" value="{{item.typeIndex}}" data-i="{{index}}" bindchange="onSpotTypeChange">
+        <view class="picker-box">{{spotTypeOptions[item.typeIndex]}}</view>
+      </picker>
+      <input class="input" placeholder="地点名称" value="{{item.name}}" data-i="{{index}}" data-k="name" bindinput="onSpotInput" />
+      <textarea class="textarea" placeholder="地点说明" value="{{item.note}}" data-i="{{index}}" data-k="note" bindinput="onSpotInput" />
+      <button size="mini" data-i="{{index}}" bindtap="removeSpot">删除点位</button>
+    </view>
+    <button class="btn-main" bindtap="addSpot" style="margin-top:14rpx;">+ 添加点位</button>
+  </view>
+
+  <button class="btn-main" bindtap="submit">发布</button>
+</view>
